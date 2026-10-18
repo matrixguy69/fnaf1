@@ -52,7 +52,7 @@
 
   	<!-- EXTRASOURCES -->
     <!-- Loads the Javascript code...-->
-    <script src="src/Runtime.js"></script>
+    <script src="src/Runtime.js?v=5"></script>
 
     <script>
 
@@ -110,10 +110,5 @@
   var m=document.getElementById("loadmsg"),t0=Date.now(),hideAt=Date.now();
   setInterval(function(){
     var now=Date.now();
-    if(n>0) hideAt=now+500;
-    m.className=(now-t0<3000||now<hideAt)?"":"done";
-  },150);
-})();
-</script>
-</body>
-</html>
+    if(n>0||document.body.getAttribute("data-busy")==="1") hideAt=now+500;
+    m.className=(now-t0<3000||now<hideAt)?""
