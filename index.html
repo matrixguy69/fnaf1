@@ -110,5 +110,10 @@
   var m=document.getElementById("loadmsg"),t0=Date.now(),hideAt=Date.now();
   setInterval(function(){
     var now=Date.now();
-    if(n>0||document.body.getAttribute("data-busy")==="1") hideAt=now+500;
-    m.className=(now-t0<3000||now<hideAt)?""
+    if(document.body.getAttribute("data-busy")==="1") hideAt=now+500;
+    m.className=(now-t0<3000||now<hideAt)?"":"done";
+  },150);
+})();
+</script>
+</body>
+</html>
