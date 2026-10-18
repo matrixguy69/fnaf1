@@ -42715,6 +42715,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 	}
 	function updateApplication()
 	{
+		if (__scope.application && __scope.application.loading) document.body.setAttribute("data-busy","1"); else document.body.removeAttribute("data-busy");
 		__scope.application.stepApplication();
 	}
 	__scope['Runtime'] = Runtime;
