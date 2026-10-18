@@ -19251,7 +19251,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 		this.currentAngle = 0;
 		this.size = this.app.preloaderCircleThickness;  // * (this.app.scaleX + this.app.scaleY) / 2;
 		this.oldAngle = 0;
-		this.counter = 25;
+		this.counter = 25; this.lastLoaded = -1; this.lastChange = Date.now();
 		this.phase = 0;
 
 		this.image = new Image();
@@ -19272,7 +19272,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 		{
 			this.phase = 0;
 			this.oldAngle = 0;
-			this.counter = 25;
+			this.counter = 25; this.lastLoaded = -1; this.lastChange = Date.now();
 		},
 		step:  function ()
 		{
@@ -19289,7 +19289,8 @@ window['Runtime'] = (function Runtime(__can, __path){
 				case 1:
 					this.angle = this.app.imagesLoaded / this.app.imagesToLoad * 2 * Math.PI;
 					// spinner circle removed
-					if (this.app.imagesLoaded == this.app.imagesToLoad)
+					if (this.lastLoaded != this.app.imagesLoaded) { this.lastLoaded = this.app.imagesLoaded; this.lastChange = Date.now(); }
+					if (this.app.imagesLoaded == this.app.imagesToLoad || (Date.now() - this.lastChange > 8000 && this.app.imagesLoaded > 0))
 						this.phase++;
 					break;
 				case 2:
@@ -25808,6 +25809,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 			image.width = image.img.width;
 			image.height = image.img.height;
 		}
+		image.img.onerror = image.img.onload;
 		application.imagesToLoad++;
 		application.loading = true;
 		image.img.src = application.resources + fileName;
