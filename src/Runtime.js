@@ -2175,7 +2175,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 				}
 			}
 
-			// Remplacer images dans les objets de m�me OI
+			// Remplacer images dans les objets de m me OI
 			pHoFirst = pHo;
 			while ((pHoFirst.hoNumPrev & 0x80000000) == 0)
 				pHoFirst = rhPtr.rhObjectList[pHoFirst.hoNumPrev & 0x7FFFFFFF];
@@ -16669,7 +16669,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 		{
 			this.dataToLoad.add(data);
 			this.imagesToLoad++;
-			this.loading = true;
+			this.loading = true; document.body.setAttribute("data-busy","1");
 		},
 		/*
 		 loadAllDataNow:function()
@@ -16826,7 +16826,7 @@ window['Runtime'] = (function Runtime(__can, __path){
 						this.resetted = false;
 						this.run.resume();
 						this.run.callComputeNewDisplay();
-						this.loading = false;
+						this.loading = false; document.body.removeAttribute("data-busy");
 						this.imageBank.resetToLoad();
 						this.soundBank.resetToLoad();
 						this.fontBank.resetToLoad();
